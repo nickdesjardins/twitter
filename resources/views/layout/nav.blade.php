@@ -16,15 +16,20 @@
                 </li>
                 @endauth
                 @auth()
-                <li class="nav-item">
-                    <a class="nav-link {{ (Route::is('profile')) ? 'active' : '' }}" href="{{ route('profile')}}">{{ Auth::user()->email }}</a>
-                </li>
-                <li class="nav-item">
-                    <form action="{{ route('logout')}}" method="POST">
-                    @csrf
-                        <button type="submit" class="btn btn-danger btn-sm">Logout</button>
-                    </form>
-                </li>
+                    @if(Auth::user()->is_admin)
+                        <li class="nav-item">
+                            <a class="nav-link {{ (Route::is('admin.dashboard')) ? 'active' : '' }}" href="{{ route('admin.dashboard')}}">Admin Dashboard</a>
+                        </li>
+                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link {{ (Route::is('profile')) ? 'active' : '' }}" href="{{ route('profile')}}">{{ Auth::user()->email }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{ route('logout')}}" method="POST">
+                        @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                        </form>
+                    </li>
                 @endauth
 
             </ul>
